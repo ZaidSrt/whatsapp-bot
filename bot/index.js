@@ -13,7 +13,7 @@ let global = [];
 const client = new Client({
   authStrategy: new LocalAuth(),
   puppeteer: {
-    headless: false, // activa si quieres ver el navegador
+    // headless: false, // activa si quieres ver el navegador
   },
 });
 
