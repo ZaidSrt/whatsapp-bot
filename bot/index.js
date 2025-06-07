@@ -21,7 +21,6 @@ client.on("loading_screen", (percent, message) => console.log("LOADING SCREEN", 
 
 let pairingCodeRequested = false; // validacion para mandar solo una vez el codigo QR
 client.on("qr", async (qr) => {
-  // console.log(qr);
   const pairingCodeEnabled = false;
 
   if (pairingCodeEnabled && !pairingCodeRequested) {
@@ -50,6 +49,8 @@ client.on("ready", async () => {
 });
 
 client.on("message", async (msg) => {
+  console.log(msg.body);
+
   if (msg.body) {
     if (!global[msg.notifyName]) {
       global[msg.notifyName] = [];
@@ -60,6 +61,8 @@ client.on("message", async (msg) => {
       let messages = [...global[msg.notifyName]];
       messages.unshift({ role: "system", content: prompt });
 
+      console.log(messages);
+
       const response = await fetch(url, {
         method: "POST",
         headers,
@@ -69,6 +72,8 @@ client.on("message", async (msg) => {
         }),
       });
       const data = await response.json();
+      console.log(data);
+
       const reply = data.choices?.[0]?.message?.content || "No response from GPT.";
       global[msg.notifyName].push({ role: "system", content: reply });
 
@@ -83,8 +88,6 @@ client.on("message", async (msg) => {
 // FUNCIONES API
 function initBot() {
   client.initialize();
-  console.log(keyGPT);
-  
 }
 
 function sentMessage(from, message) {

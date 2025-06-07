@@ -1,8 +1,7 @@
 const { Client, Location, Poll, List, Buttons, LocalAuth } = require("whatsapp-web.js");
+require("dotenv").config();
 
 const url = "https://api.openai.com/v1/chat/completions";
-
-
 const keyGPT = process.env.OPENIA_KEY;
 const headers = {
   "Content-Type": "application/json",
