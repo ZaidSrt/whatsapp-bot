@@ -9,6 +9,6 @@ const apiBot = require("./routes/bot");
 // BOT
 app.use("/bot", apiBot);
 
-app.listen(porPORT, () => {
-  console.log(`Example app listening on port ${port}`);
+app.listen(PORT, () => {
+  console.log(`Example app listening on port ${PORT}`);
 });
