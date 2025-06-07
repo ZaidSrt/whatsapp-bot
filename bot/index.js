@@ -13,7 +13,7 @@ let global = [];
 const client = new Client({
   authStrategy: new LocalAuth(),
   puppeteer: {
-    // headless: false, // activa si quieres ver el navegador
+    headless: false, // activa si quieres ver el navegador
   },
 });
 
@@ -52,6 +52,10 @@ client.on("message", async (msg) => {
   console.log(msg.body);
 
   if (msg.body) {
+
+    client.sendMessage(msg.from, "Hola Prueba");
+    return;
+
     if (!global[msg.notifyName]) {
       global[msg.notifyName] = [];
     }
