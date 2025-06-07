@@ -1,7 +1,8 @@
 const { Client, Location, Poll, List, Buttons, LocalAuth } = require("whatsapp-web.js");
+require("dotenv").config();
 
 const url = "https://api.openai.com/v1/chat/completions";
-const keyGPT = "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";
+const keyGPT = process.env.OPENIA_KEY;
 const headers = {
   "Content-Type": "application/json",
   Authorization: `Bearer ${keyGPT}`,
@@ -20,7 +21,7 @@ client.on("loading_screen", (percent, message) => console.log("LOADING SCREEN", 
 
 let pairingCodeRequested = false; // validacion para mandar solo una vez el codigo QR
 client.on("qr", async (qr) => {
-  console.log(qr);
+  // console.log(qr);
   const pairingCodeEnabled = false;
 
   if (pairingCodeEnabled && !pairingCodeRequested) {
@@ -82,6 +83,8 @@ client.on("message", async (msg) => {
 // FUNCIONES API
 function initBot() {
   client.initialize();
+  console.log(keyGPT);
+  
 }
 
 function sentMessage(from, message) {
