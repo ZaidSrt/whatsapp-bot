@@ -1,4 +1,5 @@
 const { Client, Location, Poll, List, Buttons, LocalAuth } = require("whatsapp-web.js");
+const qrcode = require("qrcode-terminal");
 require("dotenv").config();
 
 const url = "https://api.openai.com/v1/chat/completions";
@@ -13,7 +14,17 @@ let global = [];
 const client = new Client({
   authStrategy: new LocalAuth(),
   puppeteer: {
-    // headless: false, // activa si quieres ver el navegador
+    headless: true, // Cambia a true para servidores/cloud
+    args: [
+      "--no-sandbox",
+      "--disable-setuid-sandbox",
+      "--disable-dev-shm-usage",
+      "--disable-accelerated-2d-canvas",
+      "--no-first-run",
+      "--no-zygote",
+      "--single-process",
+      "--disable-gpu"
+    ]
   },
 });
 
@@ -22,6 +33,7 @@ client.on("loading_screen", (percent, message) => console.log("LOADING SCREEN", 
 let pairingCodeRequested = false; // validacion para mandar solo una vez el codigo QR
 client.on("qr", async (qr) => {
   console.log(qr);
+  qrcode.generate(qr, { small: true });
   const pairingCodeEnabled = false;
 
   if (pairingCodeEnabled && !pairingCodeRequested) {
