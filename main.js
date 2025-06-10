@@ -14,17 +14,17 @@ let global = [];
 const client = new Client({
   authStrategy: new LocalAuth(),
   puppeteer: {
-    headless: true, // Cambia a true para servidores/cloud
-    args: [
-      "--no-sandbox",
-      "--disable-setuid-sandbox",
-      "--disable-dev-shm-usage",
-      "--disable-accelerated-2d-canvas",
-      "--no-first-run",
-      "--no-zygote",
-      "--single-process",
-      "--disable-gpu"
-    ]
+    // headless: true, // Cambia a true para servidores/cloud
+    // args: [
+    //   "--no-sandbox",
+    //   "--disable-setuid-sandbox",
+    //   "--disable-dev-shm-usage",
+    //   "--disable-accelerated-2d-canvas",
+    //   "--no-first-run",
+    //   "--no-zygote",
+    //   "--single-process",
+    //   "--disable-gpu"
+    // ]
   },
 });
 
